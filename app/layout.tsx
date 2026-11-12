@@ -1,0 +1,34 @@
+import type { Metadata, Viewport } from 'next';
+import './globals.css';
+import { Header, Footer, StickyBar, JsonLd } from '../components/Common';
+import Motion from '../components/Motion';
+import { businessJsonLd, webSiteJsonLd } from '../lib/jsonld';
+import { SITE_URL, SITE_NAME, NAVER_VERIFY, GOOGLE_VERIFY } from '../lib/site';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_NAME, template: `%s` },
+  description: '서울 25개 구·파주·김포 비계, 시스템비계, 이지아이휀스(EGI휀스), 공사장 방음벽 설치·해체. 에이비씨산업개발 010-4014-5719',
+  robots: { index: true, follow: true },
+  verification: { google: GOOGLE_VERIFY || undefined, other: NAVER_VERIFY ? { 'naver-site-verification': NAVER_VERIFY } : undefined },
+};
+
+export const viewport: Viewport = { themeColor: '#17191c', width: 'device-width', initialScale: 1 };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko">
+      <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+      </head>
+      <body>
+        <JsonLd data={[businessJsonLd(), webSiteJsonLd()]} />
+        <Header />
+        {children}
+        <Footer />
+        <StickyBar />
+        <Motion />
+      </body>
+    </html>
+  );
+}
