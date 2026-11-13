@@ -13,7 +13,7 @@ OUT = ROOT / 'public' / 'og'
 W, H = 1200, 630
 SAFE_L, SAFE_W = 300, 600  # 가운데 정사각형(285~915) 안쪽
 BRAND, PHONE = '에이비씨산업개발', '010-4014-5719'  # lib/site.ts 와 맞출 것
-NAVY, ACCENT = (23, 25, 28), (242, 195, 0)  # 그라파이트·안전 노랑 (globals.css --ink·--yellow)
+NAVY, ACCENT = (26, 26, 26), (228, 82, 27)  # 짙은 #1a1a1a · 오렌지 #e4521b (globals.css)
 # 윈도우는 맑은 고딕, 리눅스(예약 작업)는 Noto CJK — fonts-noto-cjk 패키지
 _FONTS = [(r'C:\Windows\Fonts\malgunbd.ttf', r'C:\Windows\Fonts\malgun.ttf'),
           ('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc', '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'),
