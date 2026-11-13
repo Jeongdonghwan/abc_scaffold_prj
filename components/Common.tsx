@@ -1,7 +1,7 @@
 // 공통 UI — 흰 헤더 + 사진 히어로 + 오렌지 강조(참고: web_Agency references/construction), 각진 버튼, 선 아이콘, 섹션 번호 없음.
 import Link from 'next/link';
 import { BRAND, LEGAL_NAME, CONTACT, BUSINESS, AREA_LINE, WORKS_LINE, tel, smsHref } from '../lib/site';
-import { PHOTOS } from '../lib/data';
+import { PHOTOS, STOCK } from '../lib/data';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
   <>{(Array.isArray(data) ? data : [data]).map((d, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d).replace(/</g, '\\u003c') }} />)}</>
@@ -23,7 +23,7 @@ export const Actions = ({ sms = true, dark = false }: { sms?: boolean; dark?: bo
 );
 
 export const Photo = ({ id, alt, className, lazy = true }: { id: string; alt: string; className?: string; lazy?: boolean }) => {
-  const p = PHOTOS.find((x) => x.id === id)!;
+  const p = [...PHOTOS, ...STOCK].find((x) => x.id === id)!;
   return <img src={`/img/${id}.webp`} alt={alt} width={p.w} height={p.h} className={className} loading={lazy ? 'lazy' : undefined} />;
 };
 

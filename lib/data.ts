@@ -2,6 +2,7 @@
 import pagesData from '../data/site-pages.json';
 import placesData from '../data/places.json';
 import photosData from '../data/photos.json';
+import stockData from '../data/stock.json';
 import { OPEN_WAVE } from './site';
 
 export interface Page {
@@ -19,6 +20,8 @@ export const OPEN_PAGES = ALL_PAGES.filter((p) => p.wave <= OPEN_WAVE);
 export const PLACES = placesData.places as Record<string, Place>;
 export const HUBS = placesData.hubs as string[];
 export const PHOTOS = photosData.photos as Photo[];
+// 무료 스톡(Unsplash) — 회사 작업 사진이 아님. 비계 페이지 머리 사진에만, alt 는 장면 설명만
+export const STOCK = stockData.photos as { id: string; alt: string; w: number; h: number }[];
 
 export const pagePath = (p: Page) => `/${p.slug}/`;
 export const pageEncodedPath = (p: Page) => `/${encodeURIComponent(p.slug)}/`;
@@ -66,4 +69,12 @@ export function photosFor(p: Page, n = 3): Photo[] {
   const fence = p.service === 'egi' || p.service === '울타리';
   const pool = fence ? PHOTOS.filter((x) => x.kind !== 'prep') : PHOTOS;
   return rotate(pool, p.slug, 'ph').slice(0, n);
+}
+
+// 키워드 페이지 머리 사진 — 울타리: 아래 사진 칸(photosFor n장)과 겹치지 않는 현장 사진, 비계: 스톡 비계 사진
+export function heroFor(p: Page, n: number): { id: string; alt: string } {
+  const fence = p.service === 'egi' || p.service === '울타리';
+  if (fence) { const x = photosFor(p, n + 1)[n]; return { id: x.id, alt: `${p.kw} - ${x.scene}` }; }
+  const x = rotate(STOCK, p.slug, 'st')[0];
+  return { id: x.id, alt: x.alt };
 }

@@ -1,0 +1,38 @@
+{
+ "note": "무료 스톡 사진(Unsplash License, Unsplash+ 아님). 회사 작업 사진이 아님 — 현장·시공 사례·작업 사진이라 부르지 않는다. 비계 키워드 페이지 머리 사진에만 쓴다. 상표·글씨가 보이는 사진은 뺐다.",
+ "photos": [
+  {
+   "id": "s01",
+   "file": "public/img/s01.webp",
+   "url": "https://images.unsplash.com/photo-1543412970-5673add7e407?w=1600&q=80&fm=jpg",
+   "source": "https://unsplash.com/photos/BQrqREC-Fyk",
+   "author": "Clark Gu",
+   "license": "Unsplash License",
+   "alt": "강관과 발판이 겹겹이 얽힌 비계 구조",
+   "w": 1400,
+   "h": 1050
+  },
+  {
+   "id": "s02",
+   "file": "public/img/s02.webp",
+   "url": "https://images.unsplash.com/photo-1578907464594-fa58ed85c9b0?w=1600&q=80&fm=jpg",
+   "source": "https://unsplash.com/photos/9FZELrrgwbc",
+   "author": "Tobias Nii Kwatei Quartey",
+   "license": "Unsplash License",
+   "alt": "아래에서 올려다본 건물 외벽 비계",
+   "w": 1400,
+   "h": 934
+  },
+  {
+   "id": "s03",
+   "file": "public/img/s03.webp",
+   "url": "https://images.unsplash.com/photo-1653837105223-63912447c7a0?w=1600&q=80&fm=jpg",
+   "source": "https://unsplash.com/photos/6NrnN_L8Pvg",
+   "author": "Karen Barrett",
+   "license": "Unsplash License",
+   "alt": "긴 건물 외벽을 따라 세운 비계와 승강 계단",
+   "w": 1400,
+   "h": 1050
+  }
+ ]
+}

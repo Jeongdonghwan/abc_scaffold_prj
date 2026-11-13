@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, hubPath, hubEncodedPath, related } from '../../lib/data';
+import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, hubPath, hubEncodedPath, related, heroFor } from '../../lib/data';
 import { compose, placeLabel, COMPARE } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
@@ -36,7 +36,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
   const rel = related(p);
   const path = pageEncodedPath(p);
   const relList = [...rel.samePlace, ...rel.sameHub, ...rel.other].map((x) => ({ name: x.kw, path: pageEncodedPath(x) }));
-  const hero = c.photos.items[0].p;
+  const hero = heroFor(p, c.photos.items.length);
 
   return (
     <main>
@@ -52,9 +52,9 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         itemListJsonLd(relList.length ? relList : [{ name: '작업 지역', path: '/area/' }]),
       ]} />
 
-      {/* 울타리 페이지 = 현장 사진 히어로, 비계 페이지 = 사진이 없어 쿨그레이 글 히어로(지어낸 도면 없음) */}
-      <section className={c.fence ? 'khero photo' : 'khero plain'}>
-        {c.fence && <figure className="khero-bg"><Photo id={hero.id} alt={`${p.kw} 참고 - ${hero.scene}`} lazy={false} /></figure>}
+      {/* 울타리 페이지 = 아래 사진 칸과 겹치지 않는 현장 사진, 비계 페이지 = 스톡 비계 사진(장면 설명 alt, 현장이라 부르지 않음) */}
+      <section className="khero photo">
+        <figure className="khero-bg"><Photo id={hero.id} alt={hero.alt} lazy={false} /></figure>
         <div className="wrap khero-in">
           <nav className="crumbs" aria-label="경로">
             <Link href="/">홈</Link><span>/</span><Link href="/area/">작업 지역</Link>
@@ -62,7 +62,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
           </nav>
           <h1><span><i>{c.h1[0]}</i></span>{c.h1[1] && <span><i className="hl">{c.h1[1]}</i></span>}</h1>
           <p className="hero-lead">{c.lead}</p>
-          <Actions dark={c.fence} />
+          <Actions dark />
         </div>
       </section>
 
@@ -72,6 +72,21 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
           <dl>{c.summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
         </section>
       </div>
+
+      <section className="sec shots-sec">
+        <div className="wrap">
+          <SectionHead title={c.photos.heading} sub={c.photos.sub} />
+          <div className={`shots n${c.photos.items.length}`}>
+            {c.photos.items.map(({ p: ph, caption }, i) => (
+              <figure key={ph.id} className="pcard" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
+                <div className="ph"><Photo id={ph.id} alt={`${BRAND} 현장 - ${ph.scene}`} /></div>
+                <figcaption>{caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="more-line"><Link href="/work/" className="btn-text">현장 사진 전체 <IconArrow /></Link></p>
+        </div>
+      </section>
 
       <section className="sec">
         <div className="wrap">
@@ -117,21 +132,6 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         <div className="wrap band-d-in">
           <p>{c.band}</p>
           <Actions sms={false} dark />
-        </div>
-      </section>
-
-      <section className="sec">
-        <div className="wrap">
-          <SectionHead title={c.photos.heading} sub={c.photos.sub} />
-          <div className={`shots n${c.photos.items.length}`}>
-            {c.photos.items.map(({ p: ph, caption }, i) => (
-              <figure key={ph.id} className="pcard" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="ph"><Photo id={ph.id} alt={`${BRAND} 현장 - ${ph.scene}`} /></div>
-                <figcaption>{caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="more-line"><Link href="/work/" className="btn-text">현장 사진 전체 <IconArrow /></Link></p>
         </div>
       </section>
 

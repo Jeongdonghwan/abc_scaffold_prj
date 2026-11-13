@@ -1,7 +1,7 @@
 /* 에이비씨산업개발 — 종합 건설 기업형 (참고: web_Agency/public/references/construction)
    빌린 것: 흰 헤더(오렌지 밑줄 호버·오른쪽 전화), 사진 전면 히어로(왼쪽 어둡게), 가운데 섹션 머리(영문 한 단어 + 큰 제목),
    소개 2단(큰 사진 + 걸친 작은 사진), 회색 바탕 사업 카드(호버 시 아래 오렌지 선), 현장 가로 레일, 오렌지 마무리 띠, 짙은 3단 푸터, 서브 페이지 회색 머리.
-   빼고 바꾼 것: 숫자 띠·배지(연혁 숫자), 스톡 사진, 둥근 점 페이지네이션, 인트로 화면, 비계 선 도면(지어낸 그림).
+   빼고 바꾼 것: 숫자 띠·배지(연혁 숫자), 참고 사이트의 스톡 사진(비계 키워드 머리만 무료 스톡 비계 사진, data/stock.json), 둥근 점 페이지네이션, 인트로 화면, 비계 선 도면(지어낸 그림).
    표면: 흰 · 짙은 #1a1a1a · 쿨그레이 #eef0f2 · 오렌지 #e4521b(강조 1색, 흰 글씨 대비 위해 참고 #ff6b35 보다 짙게). 모서리 0. */
 :root {
   --ink: #1a1a1a; --ink-2: #242424; --paper: #fff; --gray: #eef0f2; --line: #dfe2e5; --muted: #63676c;
@@ -60,7 +60,7 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.25; }
 .hhero-bg img, .khero-bg img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 18s var(--ease) both; }
 .hhero-bg::after, .khero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, .74) 0%, rgba(0, 0, 0, .52) 45%, rgba(0, 0, 0, .18) 100%); }
 @keyframes kenburns { from { transform: scale(1.1); } to { transform: scale(1); } }
-.hhero-in { position: relative; z-index: 1; padding-top: 72px; padding-bottom: 150px; }
+.hhero-in { position: relative; z-index: 1; padding-top: 56px; padding-bottom: 220px; }
 .hero-en { margin: 0 0 22px; font-size: .82rem; font-weight: 700; letter-spacing: .3em; color: var(--accent); }
 .hhero h1, .khero h1 { margin: 0; font-size: clamp(2.2rem, 5.4vw, 4.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; }
 .hhero h1 span, .khero h1 span { display: block; overflow: hidden; }
@@ -68,20 +68,17 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.25; }
 .hhero h1 span:nth-child(2) i, .khero h1 span:nth-child(2) i { animation-delay: .12s; }
 @keyframes lift { from { transform: translateY(110%); } }
 .hero-lead { margin: 26px 0 0; color: rgba(255, 255, 255, .86); font-size: 1.1rem; max-width: 620px; }
-.hero-foot { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; background: rgba(26, 26, 26, .82); border-top: 1px solid rgba(255, 255, 255, .12); }
-.hero-specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 auto; }
-.hero-specs div { padding: 22px 24px 22px 0; }
-.hero-specs div + div { padding-left: 24px; border-left: 1px solid rgba(255, 255, 255, .12); }
-.hero-specs dt { font-size: .76rem; font-weight: 700; letter-spacing: .14em; color: var(--accent); }
-.hero-specs dd { margin: 4px 0 0; font-weight: 600; }
+.hero-foot { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: var(--ink); border-top: 4px solid var(--ink); }
+.hero-foot li { height: 168px; overflow: hidden; }
+.hero-foot img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.hero-foot li:hover img { transform: scale(1.05); }
 @media (max-width: 760px) {
   .hhero { min-height: 0; display: block; }
   .hhero-bg { position: relative; aspect-ratio: 4 / 3; }
   .hhero-bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(26, 26, 26, .9) 100%); }
   .hhero-in { padding-top: 28px; padding-bottom: 36px; }
-  .hero-foot { position: static; }
-  .hero-specs { grid-template-columns: 1fr; }
-  .hero-specs div, .hero-specs div + div { padding: 14px 0; border-left: 0; border-top: 1px solid rgba(255, 255, 255, .12); }
+  .hero-foot { position: static; grid-template-columns: 1fr 1fr; border-top: 0; }
+  .hero-foot li { height: auto; aspect-ratio: 4 / 3; }
 }
 
 /* ---- 키워드 히어로: 울타리 = 사진 전면, 비계 = 회색 글 머리(참고 사이트 서브 페이지 머리) ---- */
@@ -89,9 +86,6 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.25; }
 .khero-in { position: relative; z-index: 1; }
 .khero.photo { background: var(--ink); color: #fff; }
 .khero.photo .khero-in { padding-top: 96px; padding-bottom: 140px; }
-.khero.plain { background: var(--gray); }
-.khero.plain .khero-in { padding-top: 80px; padding-bottom: 130px; }
-.khero.plain .hero-lead { color: #3d4146; }
 .khero h1 { font-size: clamp(2rem, 4.6vw, 3.6rem); }
 .khero h1 .hl { color: var(--accent); }
 .khero.photo h1 .hl { color: #fff; }
@@ -102,7 +96,6 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.25; }
   .khero-bg { position: relative; aspect-ratio: 4 / 3; }
   .khero-bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(26, 26, 26, .9) 100%); }
   .khero.photo .khero-in { padding-top: 24px; padding-bottom: 96px; }
-  .khero.plain .khero-in { padding-top: 40px; padding-bottom: 96px; }
 }
 
 /* ---- 답 먼저 (히어로에 겹침) ---- */
@@ -203,6 +196,8 @@ ul.sq li::before { content: ''; position: absolute; left: 2px; top: 16px; width:
 .band-d .actions { margin: 0; }
 
 /* ---- 사진: 현장 카드(사진 + 아래 글 상자), 가로 레일 ---- */
+.shots-sec { padding: 64px 0 0; }
+@media (max-width: 760px) { .shots-sec { padding-top: 40px; } }
 .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .shots.n2 { grid-template-columns: 1fr 1fr; }
 .pcard, .gallery figure { margin: 0; }

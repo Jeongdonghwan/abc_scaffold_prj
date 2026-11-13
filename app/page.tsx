@@ -40,6 +40,10 @@ const FAQ = [
   { q: '비계와 울타리를 같이 맡길 수 있나요?', a: '네. 외벽 비계와 부지 둘레 이지아이휀스·방음벽을 한 번에 일정 잡을 수 있습니다.' },
 ];
 
+// 한 페이지에 같은 사진 두 번 안 씀: 히어로 f02 · 히어로 아래 띠 4장 · 소개 f11·f08 · 나머지는 레일
+const STRIP = ['f01', 'f06', 'f09', 'f10'];
+const USED = ['f02', 'f11', 'f08', ...STRIP];
+
 export default function Home() {
   const hubs = openHubs();
   const posts = getPosts().slice(0, 4);
@@ -59,12 +63,26 @@ export default function Home() {
           <p className="hero-lead">건축·리모델링·외벽공사 현장의 비계 설계와 설치·해체, 공사장 이지아이휀스와 방음벽 설치·철거. {BRAND}이 직접 시공합니다.</p>
           <Actions dark />
         </div>
-        <div className="hero-foot">
-          <dl className="wrap hero-specs">
-            <div><dt>작업</dt><dd>설계 · 설치 · 해체</dd></div>
-            <div><dt>지역</dt><dd>{AREA_LINE}</dd></div>
-            <div><dt>견적</dt><dd>현장 확인 뒤 항목별</dd></div>
-          </dl>
+        <ul className="hero-foot">
+          {STRIP.map((id) => { const x = PHOTOS.find((y) => y.id === id)!; return <li key={id}><Photo id={id} alt={`${BRAND} 현장 - ${x.scene}`} /></li>; })}
+        </ul>
+      </section>
+
+      <section className="sec dark">
+        <div className="wrap">
+          <div className="rail-head">
+            <SectionHead left en="PROJECTS" title="직접 세운 울타리 현장" sub="작업사진 게시판에 올린 이지아이휀스·가설울타리 현장입니다." />
+            <div className="rail-btns">
+              <button type="button" data-scroll="-1" data-target="home-rail" aria-label="이전 사진"><Svg d="M20 12H5M11 6l-6 6 6 6" /></button>
+              <button type="button" data-scroll="1" data-target="home-rail" aria-label="다음 사진"><Svg d="M4 12h15M13 6l6 6-6 6" /></button>
+            </div>
+          </div>
+          <ul className="rail" id="home-rail">
+            {PHOTOS.filter((x) => !USED.includes(x.id)).map((x) => (
+              <li key={x.id}><figure className="pcard"><div className="ph"><Photo id={x.id} alt={`${BRAND} 현장 - ${x.scene}`} /></div><figcaption>{x.scene}</figcaption></figure></li>
+            ))}
+          </ul>
+          <p className="more-line"><Link href="/work/" className="btn-text">사진 11장 모두 보기 <IconArrow /></Link></p>
         </div>
       </section>
 
@@ -118,24 +136,6 @@ export default function Home() {
               <tbody>{COMPARE.map(([k, a, b]) => <tr key={k}><th scope="row">{k}</th><td>{a}</td><td>{b}</td></tr>)}</tbody>
             </table>
           </div>
-        </div>
-      </section>
-
-      <section className="sec dark">
-        <div className="wrap">
-          <div className="rail-head">
-            <SectionHead left en="PROJECTS" title="직접 세운 울타리 현장" sub="작업사진 게시판에 올린 이지아이휀스·가설울타리 현장입니다." />
-            <div className="rail-btns">
-              <button type="button" data-scroll="-1" data-target="home-rail" aria-label="이전 사진"><Svg d="M20 12H5M11 6l-6 6 6 6" /></button>
-              <button type="button" data-scroll="1" data-target="home-rail" aria-label="다음 사진"><Svg d="M4 12h15M13 6l6 6-6 6" /></button>
-            </div>
-          </div>
-          <ul className="rail" id="home-rail">
-            {PHOTOS.map((x) => (
-              <li key={x.id}><figure className="pcard"><div className="ph"><Photo id={x.id} alt={`${BRAND} 현장 - ${x.scene}`} /></div><figcaption>{x.scene}</figcaption></figure></li>
-            ))}
-          </ul>
-          <p className="more-line"><Link href="/work/" className="btn-text">사진 11장 모두 보기 <IconArrow /></Link></p>
         </div>
       </section>
 
