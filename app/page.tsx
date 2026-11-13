@@ -5,7 +5,7 @@ import { COMPARE } from '../lib/compose';
 import { getPosts, postPath } from '../lib/blog';
 import { BRAND, AREA_LINE, shareMeta } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
-import { Actions, IconArrow, JsonLd, Photo, ScaffoldFig, SectionHead } from '../components/Common';
+import { Actions, IconArrow, JsonLd, Photo, SectionHead, Svg } from '../components/Common';
 
 const HOME_TITLE = `${BRAND} | 서울·파주·김포 비계·시스템비계·EGI휀스`;
 const HOME_DESC = '서울 25개 구·파주·김포 비계 설계·설치·해체, 시스템비계 맞춤 시공, 이지아이휀스(EGI휀스)와 공사장 방음벽 설치·철거. 직접 시공, 현장 확인 뒤 항목별 견적.';
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 
 // 홈페이지 '주요업무' 4가지 (source/facts.md, raw/50 문구를 사실만 남겨 다시 씀)
 const WORKS = [
-  { t: '비계', en: 'SCAFFOLD', d: '건축·리모델링·외벽공사 현장에 맞춰 비계를 설계하고 설치·해체합니다. 좁은 골목과 모양이 복잡한 외벽은 강관비계로 짭니다.', parts: '기둥 · 띠장 · 작업발판 · 안전난간 · 벽이음', slug: '서울-비계' },
-  { t: '시스템비계', en: 'SYSTEM', d: '규격 부재를 핀으로 끼워 조립하는 시스템비계를 현장에 맞춰 설계·시공합니다. 신축·중고층 외벽처럼 넓은 면에 씁니다.', parts: '수직재 · 수평재 · 가새재 · 잭베이스', slug: '서울-시스템비계' },
-  { t: '이지아이휀스', en: 'EGI FENCE', d: '공사장 경계에 아연도금 강판 패널을 세워 출입을 막고 분진과 공사 장면을 가립니다. 설치와 철거를 함께 맡습니다.', parts: 'EGI 패널 · 지주 파이프 · 버팀대 · 출입문', slug: '서울-이지아이휀스' },
-  { t: '방음벽', en: 'NOISE WALL', d: '도심 공사장 소음을 줄이는 방음벽을 세우고 공사가 끝나면 해체합니다. 주거지·학교와 붙은 현장에서 검토합니다.', parts: '방음 패널 · 지주 · 버팀대', slug: '' },
+  { t: '비계', en: 'SCAFFOLD', icon: 'M5 3v18M12 3v18M19 3v18M3 8h18M3 15h18M5 15l7-7', d: '건축·리모델링·외벽공사 현장에 맞춰 비계를 설계하고 설치·해체합니다. 좁은 골목과 모양이 복잡한 외벽은 강관비계로 짭니다.', parts: '기둥 · 띠장 · 작업발판 · 안전난간 · 벽이음', slug: '서울-비계' },
+  { t: '시스템비계', en: 'SYSTEM', icon: 'M5 4v16M19 4v16M5 9h14M5 15h14M5 9l14 6', d: '규격 부재를 핀으로 끼워 조립하는 시스템비계를 현장에 맞춰 설계·시공합니다. 신축·중고층 외벽처럼 넓은 면에 씁니다.', parts: '수직재 · 수평재 · 가새재 · 잭베이스', slug: '서울-시스템비계' },
+  { t: '이지아이휀스', en: 'EGI FENCE', icon: 'M3 6h18v11H3zM9 6v11M15 6v11M3 21h18', d: '공사장 경계에 아연도금 강판 패널을 세워 출입을 막고 분진과 공사 장면을 가립니다. 설치와 철거를 함께 맡습니다.', parts: 'EGI 패널 · 지주 파이프 · 버팀대 · 출입문', slug: '서울-이지아이휀스' },
+  { t: '방음벽', en: 'NOISE WALL', icon: 'M4 4h16v16H4zM4 9h16M4 14h16M9 4v5M15 9v5M9 14v6', d: '도심 공사장 소음을 줄이는 방음벽을 세우고 공사가 끝나면 해체합니다. 주거지·학교와 붙은 현장에서 검토합니다.', parts: '방음 패널 · 지주 · 버팀대', slug: '' },
 ];
 
 const FLOW = [
@@ -44,8 +44,6 @@ export default function Home() {
   const hubs = openHubs();
   const posts = getPosts().slice(0, 4);
   const carousel = OPEN_PAGES.filter((p) => !p.mod).slice(0, 30);
-  const big = PHOTOS[0];
-  const rest = PHOTOS.slice(1, 9);
   const seoul = hubs.filter((h) => PLACES[h].parent === '서울');
   const gyeonggi = hubs.filter((h) => PLACES[h].parent !== '서울');
 
@@ -54,33 +52,55 @@ export default function Home() {
       <JsonLd data={[faqJsonLd(FAQ), itemListJsonLd(carousel.map((p) => ({ name: p.kw, path: pageEncodedPath(p) })))]} />
 
       <section className="hhero">
-        <div className="hhero-text">
+        <figure className="hhero-bg"><Photo id="f02" alt={`${BRAND} 현장 - 보도를 따라 길게 세운 EGI휀스`} lazy={false} /></figure>
+        <div className="wrap hhero-in">
+          <p className="hero-en" aria-hidden="true">SCAFFOLD · FENCE · NOISE WALL</p>
           <h1><span><i>비계 · 시스템비계</i></span><span><i>EGI휀스 · 방음벽</i></span></h1>
           <p className="hero-lead">건축·리모델링·외벽공사 현장의 비계 설계와 설치·해체, 공사장 이지아이휀스와 방음벽 설치·철거. {BRAND}이 직접 시공합니다.</p>
           <Actions dark />
-          <dl className="hero-specs">
+        </div>
+        <div className="hero-foot">
+          <dl className="wrap hero-specs">
             <div><dt>작업</dt><dd>설계 · 설치 · 해체</dd></div>
             <div><dt>지역</dt><dd>{AREA_LINE}</dd></div>
             <div><dt>견적</dt><dd>현장 확인 뒤 항목별</dd></div>
           </dl>
         </div>
-        <figure className="hhero-ph"><Photo id="f02" alt={`${BRAND} 현장 - 보도를 따라 길게 세운 EGI휀스`} lazy={false} /></figure>
       </section>
-      <div className="hazard" aria-hidden="true" />
 
-      <section className="sec">
+      <section className="sec about">
+        <div className="wrap about-grid">
+          <div className="about-ph" data-reveal>
+            <figure className="about-main mask"><Photo id="f11" alt={`${BRAND} 현장 - 콘크리트 바닥 부지 둘레에 세운 EGI휀스`} /></figure>
+            <figure className="about-sub"><Photo id="f08" alt={`${BRAND} 현장 - 지주에 EGI 패널을 붙이는 설치 중 모습`} /></figure>
+          </div>
+          <div className="about-text" data-reveal>
+            <SectionHead left en="ABOUT" title="세우는 날부터 걷는 날까지" />
+            <p>{BRAND}은 외벽 공사용 비계와 공사장 둘레 가설울타리를 직접 세우고 걷는 시공 업체입니다. 현장 확인, 방식 결정, 설치, 점검, 해체·반출까지 같은 사람이 봅니다.</p>
+            <dl className="about-list">
+              <div><dt>비계</dt><dd>설계 · 설치 · 해체</dd></div>
+              <div><dt>시스템비계</dt><dd>맞춤 설계 · 시공</dd></div>
+              <div><dt>이지아이휀스</dt><dd>설치 · 철거</dd></div>
+              <div><dt>방음벽</dt><dd>설치 · 해체</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec alt">
         <div className="wrap">
-          <SectionHead title="맡는 일" sub="세우는 날부터 걷는 날까지 같은 사람이 봅니다." />
+          <SectionHead en="BUSINESS" title="맡는 일" sub="외벽 비계와 공사장 울타리, 두 가지 가설 공사를 함께 맡습니다." />
           <ul className="works">
-            {WORKS.map((w) => {
+            {WORKS.map((w, i) => {
               const pg = w.slug ? getPage(w.slug) : undefined;
               return (
-                <li key={w.t} data-reveal>
+                <li key={w.t} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
+                  <span className="works-ic"><Svg d={w.icon} size={30} /></span>
                   <span className="works-en">{w.en}</span>
                   <h3>{w.t}</h3>
                   <p>{w.d}</p>
                   <span className="works-parts">{w.parts}</span>
-                  {pg ? <Link href={pagePath(pg)} className="works-go" aria-label={`${pg.kw} 안내`}><IconArrow /></Link> : <span className="works-go off" />}
+                  {pg && <Link href={pagePath(pg)} className="works-go">{pg.kw} 안내 <IconArrow /></Link>}
                 </li>
               );
             })}
@@ -88,55 +108,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sec alt">
-        <div className="wrap">
-          <SectionHead title="강관비계와 시스템비계" sub="같은 비계라도 짜는 방식이 다릅니다. 현장 모양과 높이로 고릅니다." />
-          <div className="cmp-grid">
-            <div className="cmp-figs" data-reveal>
-              <figure><ScaffoldFig kind="pipe" /><figcaption>강관비계 — 파이프를 클램프로 엮어 현장 모양대로</figcaption></figure>
-              <figure><ScaffoldFig kind="system" /><figcaption>시스템비계 — 규격 부재를 핀으로 끼워</figcaption></figure>
-            </div>
-            <div className="table-wrap" data-reveal>
-              <table className="cmp">
-                <caption>구조 비교</caption>
-                <thead><tr><th scope="col">항목</th><th scope="col">강관비계</th><th scope="col">시스템비계</th></tr></thead>
-                <tbody>{COMPARE.map(([k, a, b]) => <tr key={k}><th scope="row">{k}</th><td>{a}</td><td>{b}</td></tr>)}</tbody>
-              </table>
-            </div>
+      <section className="sec">
+        <div className="wrap narrow">
+          <SectionHead en="COMPARE" title="강관비계와 시스템비계" sub="같은 비계라도 짜는 방식이 다릅니다. 현장 모양과 높이로 고릅니다." />
+          <div className="table-wrap" data-reveal>
+            <table className="cmp">
+              <caption>구조 비교</caption>
+              <thead><tr><th scope="col">항목</th><th scope="col">강관비계</th><th scope="col">시스템비계</th></tr></thead>
+              <tbody>{COMPARE.map(([k, a, b]) => <tr key={k}><th scope="row">{k}</th><td>{a}</td><td>{b}</td></tr>)}</tbody>
+            </table>
           </div>
         </div>
       </section>
 
       <section className="sec dark">
         <div className="wrap">
-          <SectionHead title="직접 세운 울타리 현장" sub="작업사진 게시판에 올린 이지아이휀스·가설울타리 현장입니다." />
-          <div className="mosaic">
-            <figure className="m-big" data-reveal><Photo id={big.id} alt={`${BRAND} 현장 - ${big.scene}`} /><figcaption>{big.scene}</figcaption></figure>
-            {rest.map((x, i) => (
-              <figure key={x.id} data-reveal style={{ transitionDelay: `${(i % 3) * 80}ms` }}><Photo id={x.id} alt={`${BRAND} 현장 - ${x.scene}`} /><figcaption>{x.scene}</figcaption></figure>
-            ))}
+          <div className="rail-head">
+            <SectionHead left en="PROJECTS" title="직접 세운 울타리 현장" sub="작업사진 게시판에 올린 이지아이휀스·가설울타리 현장입니다." />
+            <div className="rail-btns">
+              <button type="button" data-scroll="-1" data-target="home-rail" aria-label="이전 사진"><Svg d="M20 12H5M11 6l-6 6 6 6" /></button>
+              <button type="button" data-scroll="1" data-target="home-rail" aria-label="다음 사진"><Svg d="M4 12h15M13 6l6 6-6 6" /></button>
+            </div>
           </div>
+          <ul className="rail" id="home-rail">
+            {PHOTOS.map((x) => (
+              <li key={x.id}><figure className="pcard"><div className="ph"><Photo id={x.id} alt={`${BRAND} 현장 - ${x.scene}`} /></div><figcaption>{x.scene}</figcaption></figure></li>
+            ))}
+          </ul>
           <p className="more-line"><Link href="/work/" className="btn-text">사진 11장 모두 보기 <IconArrow /></Link></p>
-        </div>
-      </section>
-
-      <section className="band-y" data-reveal>
-        <div className="wrap band-y-in">
-          <p>현장 주소와 외벽·부지 사진을 보내 주시면 비계 종류와 울타리 길이부터 짚어 드립니다.</p>
-          <Actions sms={false} />
         </div>
       </section>
 
       <section className="sec">
         <div className="wrap">
-          <SectionHead title="진행 순서" />
+          <SectionHead en="PROCESS" title="진행 순서" />
           <ol className="timeline reveal-group">{FLOW.map((f) => <li key={f.t}><strong>{f.t}</strong><p>{f.d}</p></li>)}</ol>
         </div>
       </section>
 
       <section className="sec alt">
         <div className="wrap">
-          <SectionHead title="작업 지역" sub={AREA_LINE} />
+          <SectionHead en="AREA" title="작업 지역" sub={AREA_LINE} />
           <div className="areas">
             <div data-reveal>
               <h3>서울</h3>
@@ -152,7 +164,7 @@ export default function Home() {
 
       <section className="sec">
         <div className="wrap narrow">
-          <SectionHead title="자주 묻는 질문" />
+          <SectionHead en="FAQ" title="자주 묻는 질문" />
           <div className="faq">{FAQ.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}</div>
         </div>
       </section>
@@ -160,7 +172,7 @@ export default function Home() {
       {posts.length > 0 && (
         <section className="sec alt">
           <div className="wrap">
-            <SectionHead title="비계·울타리 이야기" />
+            <SectionHead en="BLOG" title="비계·울타리 이야기" />
             <ul className="linklist">{posts.map((p) => <li key={p.slug}><Link href={postPath(p)}>{p.title}<IconArrow /></Link></li>)}</ul>
             <p className="more-line"><Link href="/blog/" className="btn-text">블로그 전체 <IconArrow /></Link></p>
           </div>
@@ -170,8 +182,8 @@ export default function Home() {
       <section className="closing">
         <div className="wrap" data-reveal>
           <h2>공사 일정과 현장 주소를 알려 주세요</h2>
-          <p>시작일과 끝나는 예정일에 맞춰 설치일과 해체일을 함께 잡습니다.</p>
-          <Actions dark />
+          <p>현장 주소와 외벽·부지 사진을 보내 주시면 비계 종류와 울타리 길이부터 짚어 드립니다. 시작일과 끝나는 예정일에 맞춰 설치일과 해체일을 함께 잡습니다.</p>
+          <Actions />
         </div>
       </section>
     </main>

@@ -43,7 +43,7 @@ export default function Hub({ params }: { params: { hub: string } }) {
         <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/area/">작업 지역</Link><span>/</span><span>{H.name}</span></nav>
         <h1 className="page-title">{H.name} 비계·EGI휀스</h1>
         <p className="page-lead">{H.traits}. {H.site}.</p>
-        <Actions dark />
+        <Actions />
       </PageTop>
       <div className="wrap content">
         <section className="sec">

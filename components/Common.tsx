@@ -1,4 +1,4 @@
-// 공통 UI — 그라파이트 + 안전 노랑, 각진 슬랩 버튼, 선 아이콘(이모지 없음), 섹션 번호 없음.
+// 공통 UI — 흰 헤더 + 사진 히어로 + 오렌지 강조(참고: web_Agency references/construction), 각진 버튼, 선 아이콘, 섹션 번호 없음.
 import Link from 'next/link';
 import { BRAND, LEGAL_NAME, CONTACT, BUSINESS, AREA_LINE, WORKS_LINE, tel, smsHref } from '../lib/site';
 import { PHOTOS } from '../lib/data';
@@ -27,31 +27,10 @@ export const Photo = ({ id, alt, className, lazy = true }: { id: string; alt: st
   return <img src={`/img/${id}.webp`} alt={alt} width={p.w} height={p.h} className={className} loading={lazy ? 'lazy' : undefined} />;
 };
 
-// 비계 구조 도면 — 사진이 없는 비계 페이지의 히어로 시각 요소(사진 아님, 선 도면)
-export const ScaffoldFig = ({ kind = 'pipe' }: { kind?: 'pipe' | 'system' }) => {
-  const xs = [40, 110, 180, 250];
-  const ys = [40, 95, 150, 205, 260];
-  return (
-    <svg className="fig" viewBox="0 0 400 300" role="img" aria-label={kind === 'system' ? '시스템비계 구조 도면' : '강관비계 구조 도면'}>
-      <rect x="290" y="20" width="100" height="270" className="fig-wall" />
-      {[60, 115, 170, 225].map((y) => <rect key={y} x="310" y={y} width="22" height="30" className="fig-win" />)}
-      {[60, 115, 170, 225].map((y) => <rect key={`b${y}`} x="350" y={y} width="22" height="30" className="fig-win" />)}
-      {xs.map((x) => <line key={x} x1={x} y1="30" x2={x} y2="290" className="fig-post" />)}
-      {ys.map((y) => <line key={y} x1="30" y1={y} x2="290" y2={y} className="fig-ledger" />)}
-      {ys.slice(1).map((y) => <rect key={`p${y}`} x="40" y={y - 6} width="210" height="6" className="fig-plank" />)}
-      {kind === 'pipe'
-        ? <><line x1="40" y1="260" x2="250" y2="40" className="fig-brace" /><line x1="40" y1="150" x2="150" y2="40" className="fig-brace" /></>
-        : <>{[[40, 260, 110, 205], [110, 205, 180, 150], [180, 150, 250, 95]].map(([a, b, c, d]) => <line key={a} x1={a} y1={b} x2={c} y2={d} className="fig-brace" />)}
-            {xs.flatMap((x) => ys.map((y) => <circle key={`${x}-${y}`} cx={x} cy={y} r="4.5" className="fig-node" />))}</>}
-      {ys.slice(1).map((y) => <line key={`t${y}`} x1="250" y1={y} x2="290" y2={y} className="fig-tie" />)}
-      {xs.map((x) => <rect key={`j${x}`} x={x - 9} y="286" width="18" height="6" className="fig-base" />)}
-      <text x="30" y="20" className="fig-cap">{kind === 'system' ? 'SYSTEM · 수직재 + 수평재 + 핀 결합' : 'PIPE · 강관 + 클램프'}</text>
-    </svg>
-  );
-};
-
-export const SectionHead = ({ title, sub }: { title: string; sub?: string }) => (
-  <header className="sh" data-reveal>
+// 섹션 머리 — 가운데 정렬, 위에 영문 한 단어(선택), 아래 짧은 선이 그려지며 등장
+export const SectionHead = ({ title, sub, en, left }: { title: string; sub?: string; en?: string; left?: boolean }) => (
+  <header className={left ? 'sh left' : 'sh'} data-reveal>
+    {en && <span className="sh-en" aria-hidden="true">{en}</span>}
     <h2>{title}</h2>
     {sub && <p>{sub}</p>}
   </header>
@@ -59,8 +38,8 @@ export const SectionHead = ({ title, sub }: { title: string; sub?: string }) => 
 
 const Mark = () => (
   <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
-    <rect width="34" height="34" fill="#f2c300" />
-    <path d="M9 6v22M17 6v22M25 6v22M6 12h22M6 22h22" stroke="#17191c" strokeWidth="2.4" fill="none" />
+    <rect width="34" height="34" fill="#e4521b" />
+    <path d="M9 6v22M17 6v22M25 6v22M6 12h22M6 22h22" stroke="#fff" strokeWidth="2.4" fill="none" />
   </svg>
 );
 
@@ -85,11 +64,14 @@ export const Header = () => (
 export const Footer = () => (
   <footer className="site-footer">
     <div className="wrap foot-grid">
-      <div>
-        <strong className="foot-brand">{BRAND}</strong>
+      <div className="foot-about">
+        <Link href="/" className="logo"><Mark /><span className="logo-text"><b>{BRAND}</b><small>{LEGAL_NAME}</small></span></Link>
         <p>{WORKS_LINE} 설치·해체<br />작업 지역 {AREA_LINE}</p>
-        <p className="foot-links"><Link href="/area/">작업 지역</Link><Link href="/work/">현장 사진</Link><Link href="/blog/">블로그</Link><a href="/rss.xml">RSS</a></p>
       </div>
+      <nav className="foot-nav" aria-label="바닥 메뉴">
+        <strong>메뉴</strong>
+        <Link href="/area/">작업 지역</Link><Link href="/work/">현장 사진</Link><Link href="/blog/">블로그</Link><a href="/rss.xml">RSS</a>
+      </nav>
       <dl className="foot-info">
         <div><dt>상호</dt><dd>{LEGAL_NAME}</dd></div>
         <div><dt>전화</dt><dd><a href={tel}>{CONTACT.phone}</a></dd></div>
@@ -109,12 +91,12 @@ export const StickyBar = () => (
   </div>
 );
 
-// 허브·블로그·404 공통 상단 — 짙은 띠 + 오른쪽 현장 사진 한 장
+// 허브·블로그·404 공통 상단 — 쿨그레이 띠(경로·제목) + 오른쪽 현장 사진이 띠 아래로 걸침
 export const PageTop = ({ photo, alt, children }: { photo: string; alt: string; children: React.ReactNode }) => (
   <section className="ptop">
     <div className="wrap ptop-in">
       <div className="ptop-text">{children}</div>
-      <figure className="ptop-ph"><Photo id={photo} alt={alt} lazy={false} /></figure>
+      <figure className="ptop-ph mask"><Photo id={photo} alt={alt} lazy={false} /></figure>
     </div>
   </section>
 );

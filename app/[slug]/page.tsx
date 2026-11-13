@@ -5,7 +5,7 @@ import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, hubPath, hubEnc
 import { compose, placeLabel, COMPARE } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, IconArrow, JsonLd, SectionHead, Photo, ScaffoldFig } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead, Photo } from '../../components/Common';
 
 export const dynamicParams = false;
 
@@ -52,22 +52,17 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         itemListJsonLd(relList.length ? relList : [{ name: '작업 지역', path: '/area/' }]),
       ]} />
 
-      <section className="khero">
+      {/* 울타리 페이지 = 현장 사진 히어로, 비계 페이지 = 사진이 없어 쿨그레이 글 히어로(지어낸 도면 없음) */}
+      <section className={c.fence ? 'khero photo' : 'khero plain'}>
+        {c.fence && <figure className="khero-bg"><Photo id={hero.id} alt={`${p.kw} 참고 - ${hero.scene}`} lazy={false} /></figure>}
         <div className="wrap khero-in">
-          <div className="khero-text">
-            <nav className="crumbs" aria-label="경로">
-              <Link href="/">홈</Link><span>/</span><Link href="/area/">작업 지역</Link>
-              {p.hub && <><span>/</span><Link href={hubPath(p.hub)}>{PLACES[p.hub].name}</Link></>}
-            </nav>
-            <h1><span><i>{c.h1[0]}</i></span>{c.h1[1] && <span><i className="hl">{c.h1[1]}</i></span>}</h1>
-            <p className="hero-lead">{c.lead}</p>
-            <Actions dark />
-          </div>
-          <figure className="khero-vis">
-            {c.fence
-              ? <Photo id={hero.id} alt={`${p.kw} 참고 - ${hero.scene}`} className="khero-ph" lazy={false} />
-              : <ScaffoldFig kind={p.service === '시스템' ? 'system' : 'pipe'} />}
-          </figure>
+          <nav className="crumbs" aria-label="경로">
+            <Link href="/">홈</Link><span>/</span><Link href="/area/">작업 지역</Link>
+            {p.hub && <><span>/</span><Link href={hubPath(p.hub)}>{PLACES[p.hub].name}</Link></>}
+          </nav>
+          <h1><span><i>{c.h1[0]}</i></span>{c.h1[1] && <span><i className="hl">{c.h1[1]}</i></span>}</h1>
+          <p className="hero-lead">{c.lead}</p>
+          <Actions dark={c.fence} />
         </div>
       </section>
 
@@ -118,19 +113,19 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <section className="band-y" data-reveal>
-        <div className="wrap band-y-in">
+      <section className="band-d" data-reveal>
+        <div className="wrap band-d-in">
           <p>{c.band}</p>
-          <Actions sms={false} />
+          <Actions sms={false} dark />
         </div>
       </section>
 
-      <section className="sec dark">
+      <section className="sec">
         <div className="wrap">
           <SectionHead title={c.photos.heading} sub={c.photos.sub} />
           <div className={`shots n${c.photos.items.length}`}>
             {c.photos.items.map(({ p: ph, caption }, i) => (
-              <figure key={ph.id} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
+              <figure key={ph.id} className="pcard" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="ph"><Photo id={ph.id} alt={`${BRAND} 현장 - ${ph.scene}`} /></div>
                 <figcaption>{caption}</figcaption>
               </figure>
@@ -140,14 +135,14 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <section className="sec">
+      <section className="sec alt">
         <div className="wrap">
           <SectionHead title={c.stepsHeading} />
           <ol className="timeline reveal-group">{c.steps.map((st) => <li key={st.t}><strong>{st.t}</strong><p>{st.d}</p></li>)}</ol>
         </div>
       </section>
 
-      <section className="sec alt">
+      <section className="sec">
         <div className="wrap narrow">
           <SectionHead title={c.care.heading} />
           <div className="prose" data-reveal>{c.care.paras.map((t, i) => <p key={i}>{t}</p>)}</div>
@@ -156,14 +151,14 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <section className="sec" id="faq">
+      <section className="sec alt" id="faq">
         <div className="wrap narrow">
           <SectionHead title="자주 묻는 질문" />
           <div className="faq">{c.faq.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}</div>
         </div>
       </section>
 
-      <section className="sec alt">
+      <section className="sec">
         <div className="wrap">
           <SectionHead title={`${p.kw} 관련 안내`} />
           <div className="related">
@@ -181,7 +176,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         <div className="wrap" data-reveal>
           <h2>{c.closing.heading}</h2>
           <p>{c.closing.text}</p>
-          <Actions dark />
+          <Actions />
         </div>
       </section>
     </main>
