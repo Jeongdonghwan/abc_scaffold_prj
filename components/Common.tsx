@@ -1,6 +1,6 @@
 // 공통 UI — 흰 헤더 + 사진 히어로 + 오렌지 강조(참고: web_Agency references/construction), 각진 버튼, 선 아이콘, 섹션 번호 없음.
 import Link from 'next/link';
-import { BRAND, LEGAL_NAME, CONTACT, BUSINESS, AREA_LINE, WORKS_LINE, tel, smsHref } from '../lib/site';
+import { BRAND, LEGAL_NAME, CONTACT, BUSINESS, AREA_LINE, WORKS_LINE, UPDATED, tel, smsHref } from '../lib/site';
 import { PHOTOS, STOCK } from '../lib/data';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
@@ -70,7 +70,7 @@ export const Footer = () => (
       </div>
       <nav className="foot-nav" aria-label="바닥 메뉴">
         <strong>메뉴</strong>
-        <Link href="/area/">작업 지역</Link><Link href="/work/">현장 사진</Link><Link href="/blog/">블로그</Link><a href="/rss.xml">RSS</a>
+        <Link href="/about/">소개</Link><Link href="/area/">작업 지역</Link><Link href="/work/">현장 사진</Link><Link href="/blog/">블로그</Link><a href="/rss.xml">RSS</a>
       </nav>
       <dl className="foot-info">
         <div><dt>상호</dt><dd>{LEGAL_NAME}</dd></div>
@@ -80,7 +80,7 @@ export const Footer = () => (
         {BUSINESS.bizNumber && <div><dt>사업자</dt><dd>{BUSINESS.bizNumber}</dd></div>}
       </dl>
     </div>
-    <div className="wrap foot-bottom">© {new Date().getFullYear()} {LEGAL_NAME} · 상담 때 받은 주소·사진은 현장 확인과 견적에만 씁니다.</div>
+    <div className="wrap foot-bottom">© {new Date().getFullYear()} {LEGAL_NAME} · 최종 수정 <time dateTime={UPDATED}>{UPDATED}</time> · 상담 때 받은 주소·사진은 현장 확인과 견적에만 씁니다.</div>
   </footer>
 );
 

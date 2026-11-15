@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 _preview/
 source/raw/
 source/home.png
+.lastmod.json
