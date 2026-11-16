@@ -7,8 +7,8 @@ pattern: agency
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 높이를 먼저, 두께와 모양은 그다음

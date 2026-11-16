@@ -7,8 +7,8 @@ pattern: cause
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 하나는 소음을 줄이는 벽, 하나는 가리는 울타리입니다

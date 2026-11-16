@@ -7,8 +7,8 @@ pattern: cost
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-22
+publishedAt: 2026-11-22
 ---
 
 ## 끝난 뒤 자재의 행방

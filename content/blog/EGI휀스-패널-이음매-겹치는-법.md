@@ -7,8 +7,8 @@ pattern: diy
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 골을 맞물려 겹치고, 겹친 자리를 함께 조입니다

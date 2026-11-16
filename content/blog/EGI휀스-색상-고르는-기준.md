@@ -7,8 +7,8 @@ pattern: agency
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-22
+publishedAt: 2026-11-22
 ---
 
 ## 네 가지 물음으로 정합니다

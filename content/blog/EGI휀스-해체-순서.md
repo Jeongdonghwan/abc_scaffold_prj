@@ -7,8 +7,8 @@ pattern: diy
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 설치의 반대 순서로, 구간을 나눠 걷습니다

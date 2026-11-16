@@ -7,8 +7,8 @@ pattern: cause
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-29
+publishedAt: 2026-11-29
 ---
 
 ## 보이는 울타리와 가리는 울타리

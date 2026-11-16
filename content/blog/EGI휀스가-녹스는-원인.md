@@ -7,8 +7,8 @@ pattern: cause
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 도금이 사라진 자리에 물이 닿으면

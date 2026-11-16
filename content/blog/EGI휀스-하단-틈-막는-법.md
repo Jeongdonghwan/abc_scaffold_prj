@@ -7,8 +7,8 @@ pattern: diy
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 바닥을 고르고, 남는 틈은 덧대어 막습니다

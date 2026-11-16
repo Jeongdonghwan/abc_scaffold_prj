@@ -7,8 +7,8 @@ pattern: cost
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-22
+publishedAt: 2026-11-22
 ---
 
 ## 길이만으로는 정해지지 않습니다

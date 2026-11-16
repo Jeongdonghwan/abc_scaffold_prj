@@ -7,8 +7,8 @@ pattern: mistake
 industry: 가설울타리
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-22
+publishedAt: 2026-11-22
 ---
 
 ## 흙이 밀면 울타리는 바깥으로 넘어갑니다
