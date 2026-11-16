@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BRAND, LEGAL_NAME, CONTACT, BUSINESS } from './site';
+import { SITE_URL, SITE_NAME, BRAND, LEGAL_NAME, CONTACT, BUSINESS, UPDATED } from './site';
 
 // 업체 — 주소·영업시간은 확인 전이라 값이 있을 때만 넣는다(lib/site.ts TODO)
 export const businessJsonLd = () => ({
@@ -44,6 +44,7 @@ export const serviceJsonLd = (o: { name: string; type: string; description: stri
   serviceType: o.type,
   description: o.description,
   url: `${SITE_URL}${o.path}`,
+  dateModified: UPDATED,
   areaServed: { '@type': 'Place', name: o.area },
   provider: { '@id': `${SITE_URL}/#business` },
 });
