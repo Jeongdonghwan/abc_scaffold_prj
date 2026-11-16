@@ -16,7 +16,7 @@ from openpyxl.styles import Font, PatternFill, Alignment
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'keywords' / '(주)에이비씨산업개발_키워드.xlsx'
 OUT_XLSX = ROOT / 'keywords' / '에이비씨산업개발_키워드_페이지.xlsx'
-SITE_URL = 'http://127.0.0.1:18990'  # lib/site.ts 와 같게 (도메인 미정)
+SITE_URL = 'https://xn--h49al71ajsb4wdo4h70adc49p.kr'  # lib/site.ts 와 같게 (도메인 미정)
 
 # 엑셀 '단어' → 본문 조합기 서비스 (lib/compose.ts SVC 키)
 SERVICE = {'비계': '비계', '아시바': '비계', '비계설치': '비계', '비계임대': '비계', '강관비계': '강관', '시스템비계': '시스템',

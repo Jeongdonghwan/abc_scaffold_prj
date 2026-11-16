@@ -3,7 +3,7 @@
 //   (홈페이지 상호 '경기비계'는 사용자 확인 전이라 쓰지 않는다).
 
 // 도메인 미정 — 임시로 로컬 미리보기 주소. 배포: bash scripts/deploy.sh <묶음> <https://도메인>
-export const SITE_URL = process.env.SITE_URL || 'http://127.0.0.1:18990';
+export const SITE_URL = process.env.SITE_URL || 'https://xn--h49al71ajsb4wdo4h70adc49p.kr';
 export const BRAND = '에이비씨산업개발';
 export const LEGAL_NAME = '(주)에이비씨산업개발';
 export const SITE_NAME = `${BRAND} | 서울·파주·김포 비계·시스템비계·EGI휀스`;

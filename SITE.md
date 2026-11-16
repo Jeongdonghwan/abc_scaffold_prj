@@ -39,7 +39,7 @@ python -I scripts/drip/schedule_posts.py <YYYY-MM-DD>       # 오픈일 확정 �
 | 3 | 500 | 75% | 동 452 · 생활권 12 · 시·군 36 |
 | 4 | 500 | 100% | 동 355 · 시·군 75 · 구 40 · 생활권 30 (강관비계·가설울타리 포함) |
 
-`data/drip.json`: siteUrl 임시 `http://127.0.0.1:18990`, launch null → drip_status 가 WAVE=0 으로 처리(확인함).
+`data/drip.json`: siteUrl 임시 `https://xn--h49al71ajsb4wdo4h70adc49p.kr`, launch null → drip_status 가 WAVE=0 으로 처리(확인함).
 
 ## 사실 근거 (지어낸 수치 없음)
 - `source/facts.md` — 홈페이지(01040145719.m7114.kr) 문구: 비계 설계·설치·해체, 시스템비계 맞춤 설계·시공, 이지아이휀스 설치·철거, 방음벽 설치·해체, 푸터 '가설임대', 전화 010-4014-5719
@@ -72,7 +72,7 @@ python -I scripts/drip/schedule_posts.py <YYYY-MM-DD>       # 오픈일 확정 �
 ## 로컬 미리보기
 ```bash
 OPEN_WAVE=4 npx next build && rm -rf out/blog/_none
-python -m http.server 18990 --bind 127.0.0.1 --directory out   # http://127.0.0.1:18990/  (file:// 은 CSS 경로가 깨짐)
+python -m http.server 18990 --bind 127.0.0.1 --directory out   # https://xn--h49al71ajsb4wdo4h70adc49p.kr/  (file:// 은 CSS 경로가 깨짐)
 ```
 
 ## 사용자 확인 필요
