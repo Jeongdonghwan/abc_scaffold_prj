@@ -8,7 +8,7 @@ import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
 import { Actions, IconArrow, JsonLd, Photo, SectionHead, Svg } from '../components/Common';
 
 const HOME_TITLE = `${BRAND} | 서울·파주·김포 비계·시스템비계·EGI휀스`;
-const HOME_DESC = '서울 25개 구·파주·김포 비계 설계·설치·해체, 시스템비계 맞춤 시공, 이지아이휀스(EGI휀스)와 공사장 방음벽 설치·철거. 직접 시공, 현장 확인 뒤 항목별 견적.';
+const HOME_DESC = '서울 25개 구·파주·김포 비계 설치·해체, 시스템비계, EGI휀스·공사장 방음벽 설치·철거. 직접 시공, 현장 확인 뒤 견적.';
 export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESC,
