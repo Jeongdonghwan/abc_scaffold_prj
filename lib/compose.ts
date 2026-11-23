@@ -75,7 +75,7 @@ const SVC: Record<string, Svc> = {
       { t: '점검·인계', d: `발판 고정과 난간, 벽이음을 확인한 뒤 ${nm} 공사 측에 넘깁니다.` },
       { t: '해체·반출', d: `공사가 끝나면 위에서부터 차례로 내려 해체하고 ${nm} 현장 자재를 정리해 반출합니다.` },
     ],
-    faq: (lb, nm) => ({ q: `${lb}, 강관비계와 시스템비계 중 무엇을 쓰나요?`, a: `${nm} 현장의 건물 높이와 외벽 모양, 골목 폭을 보고 정합니다. 좁은 골목이나 모양이 복잡한 외벽은 강관비계, 넓고 반듯한 외벽이나 높은 건물은 시스템비계가 맞는 경우가 많습니다.` }),
+    faq: (lb, nm) => ({ q: `${lb}, 강관비계와 시스템비계 중 무엇을 쓰나요?`, a: `${nm} 현장의 건물 높이와 외벽 모양, 골목 폭을 보고 정하는데, 좁은 골목이나 모양이 복잡한 외벽은 강관비계, 넓고 반듯한 외벽이나 높은 건물은 시스템비계가 맞는 경우가 많습니다.` }),
     care: SCAFFOLD_CARE,
   },
   강관: {
@@ -102,7 +102,7 @@ const SVC: Record<string, Svc> = {
       { t: '발판·난간', d: `작업발판을 깔고 안전난간을 달아 ${nm} 현장 작업자가 다닐 통로를 만듭니다.` },
       { t: '해체', d: `공사가 끝나면 위에서부터 내려오며 해체하고 ${nm} 골목 자재를 정리합니다.` },
     ],
-    faq: (lb, nm) => ({ q: `${lb}, 좁은 골목에도 세울 수 있나요?`, a: `강관비계는 현장에서 길이를 맞춰 짜기 때문에 ${nm}처럼 건물 사이가 좁은 곳에서도 외줄로 세우는 등 방법을 찾을 수 있습니다. 이웃 건물과 간격은 현장에서 먼저 확인합니다.` }),
+    faq: (lb, nm) => ({ q: `${lb}, 좁은 골목에도 세울 수 있나요?`, a: `강관비계는 현장에서 길이를 맞춰 짜기 때문에 ${nm}처럼 건물 사이가 좁은 곳에서도 외줄로 세우는 등 방법을 찾을 수 있습니다. ${nm} 이웃 건물과 간격은 현장에서 먼저 확인합니다.` }),
     care: SCAFFOLD_CARE,
   },
   시스템: {
@@ -129,7 +129,7 @@ const SVC: Record<string, Svc> = {
       { t: '발판·난간·벽이음', d: `층마다 발판과 안전난간을 끼우고 벽이음으로 ${nm} 건물에 고정합니다.` },
       { t: '해체', d: `공사가 끝나면 끼운 순서의 반대로 풀어 ${nm} 현장 부재를 정리합니다.` },
     ],
-    faq: (lb, nm) => ({ q: `${lb}, 강관비계보다 무엇이 다른가요?`, a: `시스템비계는 규격 부재를 핀으로 끼워 조립 품질이 고르고 발판·난간이 부재로 들어갑니다. ${nm} 현장처럼 외벽이 넓고 반듯하면 시스템비계, 모양이 복잡하면 강관비계를 섞어 씁니다.` }),
+    faq: (lb, nm) => ({ q: `${lb}, 강관비계보다 무엇이 다른가요?`, a: `시스템비계는 규격 부재를 핀으로 끼워 조립 품질이 고르고 발판·난간이 부재로 들어가, ${nm} 현장처럼 외벽이 넓고 반듯하면 시스템비계, 모양이 복잡하면 강관비계를 섞어 씁니다.` }),
     care: SCAFFOLD_CARE,
   },
   egi: {
@@ -158,7 +158,7 @@ const SVC: Record<string, Svc> = {
       { t: '패널·버팀대', d: `EGI 패널을 붙이고 뒤쪽에 버팀대를 대 ${nm} 부지 쪽으로 받칩니다.` },
       { t: '철거·정리', d: `공사가 끝나면 패널과 지주를 걷고 ${nm} 부지 바닥을 정리합니다.` },
     ],
-    faq: (lb, nm) => ({ q: `${lb}, 흙바닥과 콘크리트 바닥 모두 되나요?`, a: `됩니다. 흙바닥은 지주를 박아 세우고 콘크리트·아스팔트 바닥은 앵커나 받침으로 고정합니다. ${nm} 현장 바닥 사진을 먼저 보내 주시면 방식을 미리 말씀드립니다.` }),
+    faq: (lb, nm) => ({ q: `${lb}, 흙바닥과 콘크리트 바닥 모두 되나요?`, a: `됩니다. ${nm} 현장의 흙바닥은 지주를 박아 세우고 콘크리트·아스팔트 바닥은 앵커나 받침으로 고정합니다. ${nm} 현장 바닥 사진을 먼저 보내 주시면 방식을 미리 말씀드립니다.` }),
     care: FENCE_CARE,
   },
   울타리: {
@@ -185,7 +185,7 @@ const SVC: Record<string, Svc> = {
       { t: '패널·출입문', d: `패널을 붙이고 버팀대를 대며, 출입문을 차량 동선에 맞춰 답니다.` },
       { t: '철거', d: `공사가 끝나면 걷어 내고 ${nm} 부지를 정리합니다.` },
     ],
-    faq: (lb, nm) => ({ q: `${lb}, 방음벽과 무엇이 다른가요?`, a: `일반 가설울타리는 경계와 분진·시야 차단이 목적이고, 방음벽은 소음을 줄이는 패널을 씁니다. ${nm} 현장 주변에 주거지·학교가 가까우면 방음벽을 함께 말씀드립니다.` }),
+    faq: (lb, nm) => ({ q: `${lb}, 방음벽과 무엇이 다른가요?`, a: `일반 가설울타리는 경계와 분진·시야 차단이 목적이고, 방음벽은 소음을 줄이는 패널을 쓰므로, ${nm} 현장 주변에 주거지·학교가 가까우면 방음벽을 함께 말씀드립니다.` }),
     care: FENCE_CARE,
   },
 };
@@ -210,21 +210,6 @@ const TIPS: F[] = [
   (nm) => `엘리베이터가 없는 건물은 자재를 계단으로 올리지 않도록 바깥에서 비계를 따라 올립니다. ${nm} 저층 다세대 공사에서 흔한 방식입니다.`,
 ];
 
-export interface Composed {
-  title: string; description: string; h1: [string, string]; lead: string; wl: string; svcName: string; fence: boolean;
-  answer: string; summary: [string, string][];
-  region: { heading: string; paras: string[]; facts: [string, string][] };
-  type: { heading: string; paras: string[]; parts: [string, string][]; fits: string[] };
-  mod: { heading: string; intro: string; items: string[] };
-  compare: boolean;
-  steps: { t: string; d: string }[]; stepsHeading: string;
-  care: { heading: string; paras: string[] };
-  tips: { heading: string; items: string[] };
-  photos: { heading: string; sub: string; items: { p: Photo; caption: string }[] };
-  faq: { q: string; a: string }[];
-  closing: { heading: string; text: string };
-  band: string;
-}
 
 // 구·시 안의 동 이름 (서울은 25개 구 이름)
 const dongsOf = (hub: string) => hub === '서울'
@@ -236,7 +221,7 @@ export function placeLabel(P: Place) {
   return P.name;
 }
 
-export function compose(p: Page): Composed {
+export function compose(p: Page) {
   const P = PLACES[p.place];
   const H = p.hub ? PLACES[p.hub] : null;
   const svc = SVC[p.service];
@@ -256,17 +241,7 @@ export function compose(p: Page): Composed {
     `${kwPlain} - ${BRAND} 직접 시공`,
     `${kwPlain} | 현장 맞춤 ${svc.fence ? '울타리' : '비계'} ${BRAND}`,
   ], s, 'title');
-  const descBy: Record<ModG, string> = {
-    price: `${full} ${wl} ${j(p.mod, '은')} 면적·높이·종류·기간·자재 반입 여건으로 정해집니다. 현장 확인 뒤 항목을 나눠 견적을 드립니다.`,
-    pick: `${full} ${wl} ${p.mod} 고르는 기준 — 직접 시공, 설치·해체 일정, 견적 항목, 현장 정리. ${j(BRAND, '이')} 맡는 일과 순서.`,
-    work: `${full} ${wl} ${p.mod || ''} 순서 — 현장 확인, 종류·범위 결정, 설치, 점검, 해체까지 ${j(BRAND, '이')} 직접 합니다.`.replace('  ', ' '),
-    rent: `${full} ${wl} ${p.mod || ''} 안내 — 임대 기간, 운반, 설치·해체 포함 여부를 현장에 맞춰 정합니다.`.replace('  ', ' '),
-    base: `${full} ${wl}. ${svc.aim}. ${svc.fence ? '설치·철거' : '설계·설치·해체'}를 ${j(BRAND, '이')} 맡습니다.`,
-  };
-  const description = `${descBy[g]} ${CONTACT.phone}`;
 
-  const words = kwPlain.split(' ');
-  const h1: [string, string] = [words.slice(0, -1).join(' ') || kwPlain, words.length > 1 ? words[words.length - 1] : ''];
 
   const lead = pick([
     `${svc.aim}. ${full} 현장의 ${svc.fence ? '부지 경계와 바닥' : '건물 높이와 외벽 모양'}을 보고 방식을 정합니다.`,
@@ -336,12 +311,12 @@ export function compose(p: Page): Composed {
   const modBy: Record<ModG, { heading: string; intro: string; items: string[] }> = {
     price: {
       heading: `${p.kw}, 무엇으로 정해지나`,
-      intro: `${full} ${wl} ${j(p.mod, '은')} 아래 항목으로 정해집니다. 사진과 주소를 보내 주시면 이 항목을 하나씩 확인해 견적을 드립니다.`,
+      intro: `${full} ${wl} ${j(p.mod, '은')} 아래 항목으로 정해집니다. ${nm} 현장 사진과 주소를 보내 주시면 이 항목을 하나씩 확인해 견적을 드립니다.`,
       items: rotate(svc.costs, s, 'cost').map((f) => f(nm)),
     },
     pick: {
       heading: `${p.kw} 고를 때 확인할 것`,
-      intro: `${full}에서 ${svc.name} 업체를 비교할 때는 아래를 물어보세요. ${j(BRAND, '이')} 상담 때 먼저 말씀드리는 항목이기도 합니다.`,
+      intro: `${full}에서 ${svc.name} 업체를 비교할 때는 아래를 물어보세요. ${j(BRAND, '이')} ${nm} 상담 때 먼저 말씀드리는 항목이기도 합니다.`,
       items: rotate([
         `직접 시공하는지 — ${nm} 현장에 오는 사람이 설치·해체까지 하는지`,
         `견적이 설치·기간·해체·운반으로 나뉘어 있는지`,
@@ -404,11 +379,11 @@ export function compose(p: Page): Composed {
   // ---- FAQ ----
   const pool: { q: string; a: string }[] = [
     { q: `${nm}까지 오나요?`, a: pick([`네. ${full}도 작업 지역입니다. 주소를 알려 주시면 현장 확인 일정을 잡습니다.`, `${j(nm, '은')} 서울·파주·김포 작업 지역 안에 있습니다. ${spots[0]} 쪽인지 ${spots[1]} 쪽인지 알려 주시면 자재 차량 경로를 미리 봅니다.`, `네. ${H ? H.name + ' 안 ' : ''}${nm} 현장도 맡습니다. 공사 시작일과 주소를 먼저 알려 주세요.`], s, 'fq0') },
-    { q: `${sw} 견적은 어떻게 받나요?`, a: pick([`${CONTACT.phone}로 ${nm} 현장 주소와 ${svc.fence ? '부지 경계·바닥' : '건물 외벽'} 사진을 보내 주세요. 현장을 확인한 뒤 항목을 나눠 견적을 드립니다.`, `주소와 사진이 먼저입니다. ${full} 현장을 직접 보고 설치·기간·해체·운반을 따로 적은 견적서를 드립니다.`], s, 'fq1') },
+    { q: `${sw} 견적은 어떻게 받나요?`, a: pick([`${CONTACT.phone}로 ${nm} 현장 주소와 ${svc.fence ? '부지 경계·바닥' : '건물 외벽'} 사진을 보내 주세요. ${nm} 현장을 확인한 뒤 항목을 나눠 견적을 드립니다.`, `${nm} 견적은 주소와 사진이 먼저입니다. ${full} 현장을 직접 보고 설치·기간·해체·운반을 따로 적은 견적서를 드립니다.`], s, 'fq1') },
     { q: '설치와 해체를 따로 맡겨도 되나요?', a: pick([`가능합니다. 다만 ${nm} 현장처럼 같은 업체가 설치와 해체를 함께 맡으면 고정 방식을 아는 사람이 걷어 내 정리가 빠릅니다.`, `됩니다. 다른 업체가 세운 ${svc.fence ? '울타리' : '비계'}도 ${nm} 현장에서 상태를 먼저 본 뒤 해체 일정을 잡습니다.`], s, 'fq2') },
     { q: '비계와 울타리를 함께 맡길 수 있나요?', a: pick([`네. ${nm} 현장에서 외벽 비계와 부지 둘레 이지아이휀스가 같이 필요하면 한 번에 일정을 잡습니다.`, `함께 맡깁니다. 울타리를 먼저 세워 ${nm} 부지를 막고, 그 안에서 비계를 올리는 순서가 일반적입니다.`], s, 'fq3') },
-    { q: '공사 일정이 늘어나면요?', a: pick([`설치 기간을 연장합니다. ${nm} 공사가 길어지면 해체일을 다시 맞추고, 연장 조건은 처음 견적 때 말씀드립니다.`, `공정이 밀리는 일은 흔합니다. ${full} 현장 해체일은 공사 측 일정을 듣고 다시 잡습니다.`], s, 'fq4') },
-    { q: '방음벽도 하나요?', a: pick([`네. 도심 공사장 소음을 줄이는 방음벽 설치와 해체를 합니다. ${nm} 주변에 주거지가 가까우면 함께 검토합니다.`, `합니다. 학교·주택과 붙은 ${nm} 공사장은 일반 패널 대신 방음 패널을 세우는 경우가 있습니다.`], s, 'fq5') },
+    { q: '공사 일정이 늘어나면요?', a: pick([`설치 기간을 연장해 ${nm} 공사가 길어지면 해체일을 다시 맞추고, 연장 조건은 처음 견적 때 말씀드립니다.`, `공정이 밀리는 일은 흔해서 ${full} 현장 해체일은 공사 측 일정을 듣고 다시 잡습니다.`], s, 'fq4') },
+    { q: '방음벽도 하나요?', a: pick([`네. ${nm} 주변에 주거지가 가까우면 도심 공사장 소음을 줄이는 방음벽 설치와 해체도 함께 검토합니다.`, `합니다. 학교·주택과 붙은 ${nm} 공사장은 일반 패널 대신 방음 패널을 세우는 경우가 있습니다.`], s, 'fq5') },
   ];
   const first = g === 'price' ? [pool[1]] : g === 'pick' ? [pool[2]] : g === 'rent' ? [pool[4]] : [];
   const faq = [svc.faq(sw, nm), ...first, ...rotate(pool.filter((x) => !first.includes(x)), s, 'faq')].slice(0, 3);
@@ -419,16 +394,78 @@ export function compose(p: Page): Composed {
     { heading: `${full} 공사 일정에 맞춰 세웁니다`, text: `시작일과 끝나는 예정일을 알려 주시면 설치일과 해체일을 함께 잡습니다.` },
   ], s, 'close');
 
-  const band = pick([
-    `${nm} ${svc.fence ? '부지 둘레' : '외벽'} 사진 한 장으로 ${svc.fence ? '울타리 길이와 출입문 위치' : '비계 종류와 세울 면'}를 먼저 짚어 드립니다.`,
-    `${full} ${wl}, 견적은 설치·기간·해체·운반을 나눠 드립니다.`,
-  ], s, 'band');
+
+  // ---- 2026-11-24 레이 모범 구조: 기존 재료를 절 6개 한 문단으로 묶는다(분류 줄 → h1+수식어 → 설명 → 핵심 요약 → 절 6개 → FAQ → 관련 링크) ----
+  const k = p.kw;
+  const ph0 = CONTACT.phone;
+  const sents = (t: string) => t.split(/(?<=[.?!])\s+/).map((x) => x.trim()).filter(Boolean);
+  const len = (t: string) => t.replace(/\s/g, '').length;
+  // 키워드 → 지역 이름 든 문장 순으로 골라 한 문단 210~290자(공백 제외), 출력은 원래 순서
+  const fit = (src: string[]) => {
+    const all = src.flatMap(sents);
+    const keep = new Set<number>();
+    const tier = (x: string) => (x.includes(k) ? 0 : x.includes(nm) ? 1 : 2);
+    let n = 0;
+    // 같은 지역의 동의어 키워드(비계·아시바·비계임대)끼리 같은 문장을 고르지 않게 고르는 순서를 슬러그로 돌린다
+    const order = rotate(all.map((_, i) => i), s, `fit${all.length}${all[0] || ''}`);
+    for (const t of [0, 1, 2]) order.forEach((i) => {
+      const x = all[i];
+      if (keep.has(i) || tier(x) !== t || n >= 255 || (n && n + len(x) > 320)) return;
+      keep.add(i); n += len(x);
+    });
+    return all.filter((_, i) => keep.has(i)).join(' ');
+  };
+  // '항목 — 설명' 조각 목록을 한 문장으로
+  const listLine = (head: string, items: string[]) => `${head} ${items.slice(0, 3).map((x) => (x.includes(' — ') ? x.replace(' — ', '(') + ')' : x)).join(', ')}입니다.`;
+  const stems = [nm, full, ...k.split(' ')].map((x) => x.replace(/(시|군|구|동|읍|면)$/, '')).filter((x) => x.length >= 2);
+  const spx = spots.filter((x) => !stems.some((t) => x.includes(t)));
+  const work = svc.fence ? '울타리 설치·철거' : '비계 설치·해체';
+  const h1sub = pick([
+    spx.length ? `${spx[0]} 주변 ${work}` : `세우는 날부터 걷는 날까지 직접 시공`,
+    svc.fence ? '흙바닥 지주·콘크리트 앵커 고정' : '강관비계·시스템비계 중 고르기',
+    '설치·기간·해체·운반 나눈 견적',
+    '세우는 날부터 걷는 날까지 직접 시공',
+  ], s, 'h1');
+  const M = modBy[g];
+  const stepsArr = svc.steps(nm).map((x, i) => (i === 0 ? { ...x, d: `${x.d} ${spots[0]}·${spots[1]} 주변처럼 ${(H && P.kind === '동' ? H : P).roads} 가까운 현장은 자재 차량 진입 시간도 함께 맞춥니다.` } : x));
+  const KW_AT = new Set([0, 1, 2, 5]);
+  const thing = svc.fence ? '부지 경계와 바닥' : '건물 외벽';
+  const SECS: { sub: string[]; p: string }[] = [
+    { sub: ['현장 사정', '이런 건물이 많은 곳', '현장에서 먼저 보는 것'], p: fit([...region.paras, `${k} 상담도 이 현장 사정을 먼저 듣고 시작합니다.`, `${nm} 현장 주변 도로 폭과 자재 차량 댈 자리는 사진으로 먼저 봅니다.`]) },
+    { sub: [`${svc.name} 구조`, '무엇으로 어떻게 세우나', `${svc.name}가 맞는 현장`], p: fit([...rotate(svc.explain, s, 'ex').slice(0, 2).map((f) => f(full)), listLine(`${nm}에서 ${j(svc.name, '이')} 쓰이는 공사는`, type.fits), `${full} 현장은 ${typeChoice}.`, `${k} 상담에서는 ${thing} 사진을 먼저 받아 방식을 정합니다.`]) },
+    { sub: [M.heading.replace(k, '').replace(sw, '').replace(new RegExp(`^${nm}(에서)?`), '').replace(/^(에서|의|은|는)?[,\s—]*/, '').trim() || '확인할 것', '상담 때 정할 것', '미리 알아 둘 것'], p: fit([M.intro, g === 'base' ? listLine(`${full}에서 많은 공사는`, M.items) : listLine('하나씩 보면', M.items), `${k} 상담은 이 항목을 하나씩 확인하는 데서 시작합니다.`, `${full} 현장 주소와 ${thing} 사진을 보내 주시면 이 내용을 하나씩 확인합니다.`, `${nm} 공사 일정이 정해져 있으면 시작일과 끝나는 예정일도 함께 알려 주세요.`]) },
+    { sub: ['진행 순서', '설치부터 해체까지', '상담부터 인계까지'], p: fit([`${full} ${j(wl, '은')} ${stepsArr.map((x) => x.t).join(', ')} 순서로 진행합니다.`, ...stepsArr.map((x) => x.d)]) },
+    { sub: ['안전과 현장 메모', '세운 뒤에도 확인하는 것', '안전 기준과 현장 메모'], p: fit([...care.paras, ...tips.items]) },
+    { sub: ['견적과 일정', '상담과 일정 잡기', '작업 지역과 상담'], p: pick([
+      `${k} 상담은 ${ph0}으로 받습니다. ${full} 현장 주소와 ${thing} 사진을 보내 주시면 현장을 확인한 뒤 설치·기간·해체·운반을 나눠 견적을 드립니다. 공사 시작일과 끝나는 예정일을 알려 주시면 ${nm} 설치일과 해체일을 함께 잡고, 공정이 밀리면 해체일을 다시 맞춥니다. ${nm} 주변 도로와 자재 차량 댈 자리도 사진으로 보내 주시면 준비가 빨라집니다. ${nm} 현장 사진은 문자로 보내 주셔도 됩니다.`,
+      `${j(BRAND, '은')} 서울 25개 구와 파주·김포 현장을 맡고, ${full}도 작업 지역입니다. ${nm} 현장은 ${spots[0]} 쪽인지 ${spots[1] || spots[0]} 쪽인지 알려 주시면 자재 차량 경로를 미리 봅니다. 설치부터 점검, 해체·반출까지 ${j(BRAND, '이')} 직접 하므로 ${k} 일정은 통화로 함께 정합니다. ${full} 현장 주소와 ${thing} 사진을 보내 주시면 현장 확인 뒤 항목별 견적을 드립니다. ${nm} 공사 일정이 바뀌면 설치일과 해체일을 다시 맞춥니다.`,
+      `${full} ${wl} 문의는 ${ph0}으로 받습니다. ${nm} 현장 사진을 보내 주시면 ${svc.fence ? '울타리 길이와 출입문 위치' : '비계 종류와 세울 면'}를 먼저 짚어 드리고, 현장 확인 뒤 항목별 견적을 드립니다. 비계와 이지아이휀스가 같이 필요한 ${nm} 현장은 ${k} 상담 때 한 번에 일정을 잡습니다. 공사 시작일과 끝나는 예정일을 알려 주시면 ${nm} 설치일과 해체일을 함께 잡습니다. ${k} 견적은 설치·기간·해체·운반을 나눠 드립니다.`,
+    ], s, 'p5') },
+  ];
+  const sections = SECS.map((x, i) => {
+    const sub = pick(x.sub, s, `sub${i}`);
+    return { h: KW_AT.has(i) ? `${k}${i % 2 ? ' — ' : ': '}${sub}` : sub, p: x.p };
+  });
+  const answer = answerBy[g];
+  const summaryText = `${answer} ${full} 현장 상담은 ${ph0}으로 받습니다. ${nm} 현장 주소와 ${thing} 사진을 보내 주시면 현장 확인 뒤 항목별 견적을 드립니다. 설치부터 점검, 해체·반출까지 ${j(BRAND, '이')} ${nm} 현장에서 직접 합니다.`;
+
+  // description 45~80자(§5-3): 키워드 → 관련 작업 → 사실 → 상담 전화
+  const pair = svc.fence ? '이지아이휀스·가설울타리 설치와 철거' : '강관비계·시스템비계 설치와 해체';
+  const descs = pick([
+    [`${k} — ${pair}. ${nm} 현장 확인 뒤 견적, 상담 ${ph0}`, `${k} — ${pair}. 상담 ${ph0}`],
+    spx.length ? [`${k}, ${spx[0]} 주변 현장도 ${j(BRAND, '이')} 직접 시공합니다. 상담 ${ph0}`, `${k}, ${spx[0]} 주변 현장 직접 시공. 상담 ${ph0}`] : [`${k}, ${nm} 현장도 ${j(BRAND, '이')} 직접 시공합니다. 상담 ${ph0}`],
+    [`${k} — 설치·기간·해체·운반을 나눈 견적. ${nm} 현장 상담 ${ph0}`, `${k} — 항목별 견적, ${nm} 현장 상담 ${ph0}`],
+  ], s, 'desc');
+  const description = [...descs, `${k} — ${work} 상담 ${ph0}`].find((d) => d.length >= 50 && d.length <= 80) || descs[descs.length - 1];
 
   return {
-    title, description, h1, lead, wl, svcName: svc.name, fence: svc.fence, answer: answerBy[g], summary, region, type,
-    mod: modBy[g], compare: !svc.fence && g === 'base' && p.unit !== '동·읍면', steps: svc.steps(nm).map((x, i) => (i === 0 ? { ...x, d: `${x.d} ${spots[0]}·${spots[1]} 주변처럼 ${(H && P.kind === '동' ? H : P).roads} 가까운 현장은 자재 차량 진입 시간도 함께 맞춥니다.` } : x)), stepsHeading: `${sw} 진행 순서`, care, tips, photos, faq, closing, band,
+    title, description, h1sub, lead, wl, svcName: svc.name, fence: svc.fence,
+    cat: `${P.admin} · ${wl}${p.mod ? ` ${p.mod}` : ''}`,
+    summary: summaryText, facts: summary, sections, photos, faq, closing,
   };
 }
+
+export type Composed = ReturnType<typeof compose>;
 
 // 강관비계 · 시스템비계 비교 (메인·비계 페이지 공용 — 칸은 짧게)
 export const COMPARE: [string, string, string][] = [

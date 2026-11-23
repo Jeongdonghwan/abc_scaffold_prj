@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, hubPath, hubEncodedPath, related, heroFor } from '../../lib/data';
-import { compose, placeLabel, COMPARE } from '../../lib/compose';
+import { compose, placeLabel } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, IconArrow, JsonLd, SectionHead, Photo } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, Photo } from '../../components/Common';
 
 export const dynamicParams = false;
 
@@ -27,6 +27,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
+// 레이 모범 구조(2026-11-24): 분류 줄 → h1(키워드 + 수식어) → 설명 → 핵심 요약 → 번호 절 6개 → FAQ → 관련 링크
 export default function KeywordPage({ params }: { params: { slug: string } }) {
   const p = getPage(params.slug);
   if (!p) notFound();
@@ -35,8 +36,13 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
   const H = p.hub ? PLACES[p.hub] : null;
   const rel = related(p);
   const path = pageEncodedPath(p);
-  const relList = [...rel.samePlace, ...rel.sameHub, ...rel.other].map((x) => ({ name: x.kw, path: pageEncodedPath(x) }));
   const hero = heroFor(p, c.photos.items.length);
+  const groups = [
+    { h: `${placeLabel(P)} 다른 안내`, items: rel.samePlace.slice(0, 5) },
+    { h: H ? `${H.name} 다른 동네` : '', items: H ? rel.sameHub.slice(0, 4) : [] },
+    { h: '다른 지역', items: rel.other.slice(0, 4) },
+  ].filter((g) => g.items.length);
+  const relList = groups.flatMap((g) => g.items).map((x) => ({ name: x.kw, path: pageEncodedPath(x) }));
 
   return (
     <main>
@@ -60,115 +66,44 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
             <Link href="/">홈</Link><span>/</span><Link href="/area/">작업 지역</Link>
             {p.hub && <><span>/</span><Link href={hubPath(p.hub)}>{PLACES[p.hub].name}</Link></>}
           </nav>
-          <h1><span><i>{c.h1[0]}</i></span>{c.h1[1] && <span><i className="hl">{c.h1[1]}</i></span>}</h1>
+          <div className="x-cat">{c.cat}</div>
+          <h1><span><i>{p.kw}</i></span>{' '}<span className="hero-sub"><i>{c.h1sub}</i></span></h1>
           <p className="hero-lead">{c.lead}</p>
           <Actions dark />
         </div>
       </section>
 
-      <div className="wrap">
-        <section className="answer" aria-label="요약" data-reveal>
-          <p>{c.answer}</p>
-          <dl>{c.summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-        </section>
-      </div>
-
-      <section className="sec shots-sec">
-        <div className="wrap">
-          <SectionHead title={c.photos.heading} sub={c.photos.sub} />
-          <div className={`shots n${c.photos.items.length}`}>
-            {c.photos.items.map(({ p: ph, caption }, i) => (
-              <figure key={ph.id} className="pcard" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="ph"><Photo id={ph.id} alt={`${BRAND} 현장 - ${ph.scene}`} /></div>
-                <figcaption>{caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="more-line"><Link href="/work/" className="btn-text">현장 사진 전체 <IconArrow /></Link></p>
-        </div>
-      </section>
-
-      <section className="sec">
-        <div className="wrap">
-          <SectionHead title={c.region.heading} />
-          <div className="split">
-            <div className="prose" data-reveal>{c.region.paras.map((t, i) => <p key={i}>{t}</p>)}</div>
-            <dl className="info" data-reveal>{c.region.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          </div>
-        </div>
-      </section>
-
-      <section className="sec alt">
-        <div className="wrap">
-          <SectionHead title={c.type.heading} />
-          <div className="split">
-            <div className="prose" data-reveal>
-              {c.type.paras.map((t, i) => <p key={i}>{t}</p>)}
-              <h3>{placeLabel(P)}에서 맞는 현장</h3>
-              <ul className="sq">{c.type.fits.map((x) => <li key={x}>{x}</li>)}</ul>
-            </div>
-            <dl className="spec" data-reveal>{c.type.parts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          </div>
-          {c.compare && (
-            <div className="table-wrap" data-reveal>
-              <table className="cmp">
-                <caption>강관비계와 시스템비계</caption>
-                <thead><tr><th scope="col">항목</th><th scope="col">강관비계</th><th scope="col">시스템비계</th></tr></thead>
-                <tbody>{COMPARE.map(([k, a, b]) => <tr key={k}><th scope="row">{k}</th><td>{a}</td><td>{b}</td></tr>)}</tbody>
-              </table>
+      <div className="wrap x-grid">
+        <div className="x-main">
+          <section className="x-sum" data-reveal>
+            <h2>{p.kw} 핵심 요약</h2>
+            <p>{c.summary}</p>
+            <dl>{c.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          </section>
+          <article className="x-article">
+            {c.sections.map((x) => <section key={x.h}><h2>{x.h}</h2><p>{x.p}</p></section>)}
+          </article>
+          {c.photos.items.length > 0 && (
+            <div className="x-photos">
+              {c.photos.items.map((x) => <figure key={x.p.id}><Photo id={x.p.id} alt={`${p.kw} - ${x.caption}`} /></figure>)}
             </div>
           )}
+          <section className="x-faq faq" id="faq">
+            <h2>{p.kw} 자주 묻는 질문</h2>
+            {c.faq.map((f) => <details key={f.q}><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}
+          </section>
         </div>
-      </section>
+        <aside className="x-side">
+          <h3>바로 확인</h3>
+          <dl>{c.facts.slice(1, 3).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          <Actions />
+        </aside>
+      </div>
 
       <section className="sec">
-        <div className="wrap">
-          <SectionHead title={c.mod.heading} sub={c.mod.intro} />
-          <ol className="checks reveal-group">{c.mod.items.map((x) => <li key={x}>{x}</li>)}</ol>
-        </div>
-      </section>
-
-      <section className="band-d" data-reveal>
-        <div className="wrap band-d-in">
-          <p>{c.band}</p>
-          <Actions sms={false} dark />
-        </div>
-      </section>
-
-      <section className="sec alt">
-        <div className="wrap">
-          <SectionHead title={c.stepsHeading} />
-          <ol className="timeline reveal-group">{c.steps.map((st) => <li key={st.t}><strong>{st.t}</strong><p>{st.d}</p></li>)}</ol>
-        </div>
-      </section>
-
-      <section className="sec">
-        <div className="wrap narrow">
-          <SectionHead title={c.care.heading} />
-          <div className="prose" data-reveal>{c.care.paras.map((t, i) => <p key={i}>{t}</p>)}</div>
-          <h3 className="h3-sub">{c.tips.heading}</h3>
-          <ul className="sq" data-reveal>{c.tips.items.map((t) => <li key={t}>{t}</li>)}</ul>
-        </div>
-      </section>
-
-      <section className="sec alt" id="faq">
-        <div className="wrap narrow">
-          <SectionHead title="자주 묻는 질문" />
-          <div className="faq">{c.faq.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}</div>
-        </div>
-      </section>
-
-      <section className="sec">
-        <div className="wrap">
-          <SectionHead title={`${p.kw} 관련 안내`} />
-          <div className="related">
-            {rel.samePlace.length > 0 && <div><h3>{placeLabel(P)} 다른 안내</h3><ul>{rel.samePlace.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}</ul></div>}
-            {rel.sameHub.length > 0 && H && <div><h3>{H.name} 다른 동네</h3><ul>{rel.sameHub.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}</ul></div>}
-            <div><h3>다른 지역</h3><ul>
-              {rel.other.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}
-              <li><Link href={p.hub ? hubPath(p.hub) : '/area/'}>{H ? `${H.name} 안내 전체` : '작업 지역 전체'}<IconArrow /></Link></li>
-            </ul></div>
-          </div>
+        <div className="wrap related">
+          {groups.map((g) => <div key={g.h}><h3>{g.h}</h3><ul>{g.items.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}</ul></div>)}
+          {groups.length === 0 && <div><h3>작업 지역</h3><ul><li><Link href={p.hub ? hubPath(p.hub) : '/area/'}>{H ? `${H.name} 안내 전체` : '작업 지역 전체'}<IconArrow /></Link></li></ul></div>}
         </div>
       </section>
 
