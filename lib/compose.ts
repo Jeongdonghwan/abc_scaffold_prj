@@ -236,11 +236,6 @@ export function compose(p: Page) {
   const sw = `${full} ${wl}`;
 
   // ---- 메타 ----
-  const title = pick([
-    `${kwPlain} | ${full} ${svc.name} 설치·해체 - ${BRAND}`,
-    `${kwPlain} - ${BRAND} 직접 시공`,
-    `${kwPlain} | 현장 맞춤 ${svc.fence ? '울타리' : '비계'} ${BRAND}`,
-  ], s, 'title');
 
 
   const lead = pick([
@@ -420,12 +415,16 @@ export function compose(p: Page) {
   const stems = [nm, full, ...k.split(' ')].map((x) => x.replace(/(시|군|구|동|읍|면)$/, '')).filter((x) => x.length >= 2);
   const spx = spots.filter((x) => !stems.some((t) => x.includes(t)));
   const work = svc.fence ? '울타리 설치·철거' : '비계 설치·해체';
-  const h1sub = pick([
+  // h1 수식어 = title 앞부분. '키워드 수식어'가 40자 이하인 벌을 해시 순서대로 고르고, 없으면 짧은 벌
+  const h1subs = [
     spx.length ? `${spx[0]} 주변 ${work}` : `세우는 날부터 걷는 날까지 직접 시공`,
     svc.fence ? '흙바닥 지주·콘크리트 앵커 고정' : '강관비계·시스템비계 중 고르기',
     '설치·기간·해체·운반 나눈 견적',
     '세우는 날부터 걷는 날까지 직접 시공',
-  ], s, 'h1');
+  ];
+  const h1k = seedOf(`${s}::h1`) % h1subs.length;
+  const h1sub = [...h1subs.slice(h1k), ...h1subs.slice(0, h1k)].find((x) => `${p.kw} ${x}`.length <= 40) || '직접 시공';
+  const title = `${p.kw} ${h1sub} | ${BRAND}`; // 앞부분은 h1 글자와 같다. 상호는 끝에 한 번
   const M = modBy[g];
   const stepsArr = svc.steps(nm).map((x, i) => (i === 0 ? { ...x, d: `${x.d} ${spots[0]}·${spots[1]} 주변처럼 ${(H && P.kind === '동' ? H : P).roads} 가까운 현장은 자재 차량 진입 시간도 함께 맞춥니다.` } : x));
   const KW_AT = new Set([0, 1, 2, 5]);
