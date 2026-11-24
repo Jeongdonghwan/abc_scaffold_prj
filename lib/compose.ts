@@ -424,7 +424,9 @@ export function compose(p: Page) {
   ];
   const h1k = seedOf(`${s}::h1`) % h1subs.length;
   const h1sub = [...h1subs.slice(h1k), ...h1subs.slice(0, h1k)].find((x) => `${p.kw} ${x}`.length <= 40) || '직접 시공';
-  const title = `${p.kw} ${h1sub} | ${BRAND}`; // 앞부분은 h1 글자와 같다. 상호는 끝에 한 번
+  // title 전체 40자 이하(네이버 권장): 앞부분은 h1 글자와 같고, 상호를 붙여 40자를 넘으면 상호를 뺀다
+  const title0 = `${p.kw} ${h1sub}`;
+  const title = `${title0} | ${BRAND}`.length <= 40 ? `${title0} | ${BRAND}` : title0;
   const M = modBy[g];
   const stepsArr = svc.steps(nm).map((x, i) => (i === 0 ? { ...x, d: `${x.d} ${spots[0]}·${spots[1]} 주변처럼 ${(H && P.kind === '동' ? H : P).roads} 가까운 현장은 자재 차량 진입 시간도 함께 맞춥니다.` } : x));
   const KW_AT = new Set([0, 1, 2, 5]);

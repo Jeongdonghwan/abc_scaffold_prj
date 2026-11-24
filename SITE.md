@@ -92,3 +92,4 @@ python -m http.server 18990 --bind 127.0.0.1 --directory out   # https://xn--h49
 - description 을 §5-3 기준으로 새로: 키워드 → 관련 작업 2개 → 페이지 사실 → 상담 전화, 50~80자(짧은 후보로 문장 단위 선택). 주소·title·canonical·사이트맵·robots·postbuild 그대로.
 - 측정(OPEN_WAVE=1, 열린 2,000쪽, `npx tsx scripts/x_check.ts` · `python -I scripts/x_html_check.py out data/site-pages.json`): h1 중복 0 · 조사 오류 0 · description 50~75자 중복 0 · 같은 문장 최대 — 같은 서비스·수식어 다른 지역 23%·같은 구 같은 키워드 다른 동 20% · 같은 장소 동의어 키워드(비계/아시바/비계임대 등) 평균 57%(최대 75%, 남은 과제 — 사실상 같은 검색 의도) · 빌드 main 평균 2,299자, p 11개(표본 60쪽 중 3쪽 경계) · 키워드 든 h2 6개/8개 · 본문 내부링크 평균 10.7개.
 - title 규칙 변경(2026-11-24): 키워드 페이지 title = `{키워드} {h1 수식어} | {상호}` — 앞부분은 h1 글자와 같고(40자 이하가 되는 수식어 벌을 해시 순서로 선택), 상호는 끝에 한 번. og:title·twitter:title 같은 값, og:site_name = 상호. 점검: `scripts/x_check.ts` 의 title 중복·길이·h1 일치 줄.
+- title 40자 보정(2026-11-24): title 전체 40자 이하 — `{키워드} {h1 수식어} | {상호}` 가 40자를 넘으면 상호를 뺀다(h1·수식어는 그대로, og:site_name 은 상호).
